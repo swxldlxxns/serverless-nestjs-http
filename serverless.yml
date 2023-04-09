@@ -8,7 +8,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs16.x
+  runtime: nodejs18.x
   stage: ${file(ServerlessScripts.js):stage}
   region: ${file(ServerlessScripts.js):region}
   profile: ${file(ServerlessScripts.js):profile}
@@ -19,6 +19,7 @@ provider:
     ACCOUNT_ID: ${aws:accountId}
     STAGE: ${self:provider.stage}
     REGION: ${self:provider.region}
+    JWKS_URI: ${file(ServerlessScripts.js):jwksUri}
 
 custom:
   modulesLayer: ${self:service}-${self:provider.stage}-modules
@@ -44,12 +45,12 @@ layers:
     name: ${self:custom.modulesLayer}
     path: layers/modules
     compatibleRuntimes:
-      - nodejs16.x
+      - nodejs18.x
   src:
     name: ${self:custom.srcLayer}
     path: layers/src
     compatibleRuntimes:
-      - nodejs16.x
+      - nodejs18.x
 
 functions:
   auth:

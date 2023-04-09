@@ -5,3 +5,5 @@ module.exports.nodePath = () => './:/opt/node_modules';
 module.exports.stackName = () => 'serverless-nestjs-http';
 module.exports.domainName = () => `api-${this.stage()}.domain.com`;
 module.exports.logRetentionInDays = () => 14;
+module.exports.jwksUri = () =>
+  'https://login.microsoftonline.com/common/discovery/keys';
